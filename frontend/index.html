@@ -6,6 +6,7 @@
     <title>Collaborative Whiteboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="landing-page" id="landingPage">
@@ -17,14 +18,14 @@
                 <div class="room-option">
                     <h3>Create New Room</h3>
                     <p>Start a new whiteboard session and invite others to join your creative space.</p>
-                    <button class="btn btn-primary" onclick="createRoom()">Create Room</button>
+                    <button class="btn btn-primary" id="createRoomButton">Create Room</button>
                 </div>
                 
                 <div class="room-option">
                     <h3>Join Existing Room</h3>
                     <p>Enter a room code to join an existing session and collaborate with others.</p>
                     <input type="text" id="joinRoomInput" placeholder="Enter room code">
-                    <button class="btn btn-primary" onclick="joinRoom()">Join Room</button>
+                    <button class="join-room btn btn-primary" id="joinRoomButton">Join Room</button>
                 </div>
             </div>
         </div>
@@ -41,77 +42,61 @@
 
             <div class="tool-group">
                 <button class="tool-button active" data-tool="brush" title="Brush">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/>
-                    </svg>
+                    <i class="fas fa-paint-brush"></i>
                 </button>
                 <button class="tool-button" data-tool="eraser" title="Eraser">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M2 20h20M12 20V4"/>
-                    </svg>
+                    <i class="fas fa-eraser"></i>
                 </button>
             </div>
 
             <div class="tool-group">
                 <button class="tool-button" data-shape="rectangle" title="Rectangle">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="14" height="14" rx="2"/>
-                    </svg>
+                    <i class="far fa-square"></i>
                 </button>
                 <button class="tool-button" data-shape="circle" title="Circle">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="10" cy="10" r="7"/>
-                    </svg>
+                    <i class="far fa-circle"></i>
                 </button>
                 <button class="tool-button" data-shape="line" title="Line">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="5" y1="15" x2="15" y2="5"/>
-                    </svg>
+                    <i class="fas fa-slash"></i>
                 </button>
                 <button class="tool-button" data-shape="arrow" title="Arrow">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 10h10M11 5l5 5-5 5"/>
-                    </svg>
+                    <i class="fas fa-long-arrow-alt-right"></i>
                 </button>
             </div>
 
             <div class="tool-group">
                 <button class="tool-button" id="undoButton" title="Undo" disabled>
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 10h10a5 5 0 0 1 5 5v2M3 10l6-6M3 10l6 6"/>
-                    </svg>
+                    <i class="fas fa-undo-alt"></i>
                 </button>
                 <button class="tool-button" id="redoButton" title="Redo" disabled>
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10H11a5 5 0 0 0-5 5v2M21 10l-6-6M21 10l-6 6"/>
-                    </svg>
+                    <i class="fas fa-redo-alt"></i>
                 </button>
             </div>
 
             <div class="tool-group">
                 <button class="tool-button" id="clearCanvas" title="Clear">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 7l-7 7M12 14l-7-7M5 7l7 7M12 14l7-7"/>
-                    </svg>
+                    <i class="fas fa-trash-alt"></i>
                 </button>
                 <button class="tool-button" id="downloadCanvas" title="Download">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 16v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1M12 12l-4 4m0 0l-4-4m4 4V3"/>
-                    </svg>
+                    <i class="fas fa-download"></i>
                 </button>
             </div>
         </div>
 
         <div class="room-info">
             <span>Room: <span class="room-code" id="roomId"></span></span>
-            <button class="btn btn-secondary" onclick="copyRoomCode()">Copy</button>
+            <button class="copy-button btn btn-secondary" id="copyRoomButton">Copy</button>
             <div id="connectionStatus" class="status connecting">Connecting...</div>
-            <button class="btn btn-secondary" onclick="leaveRoom()">Leave</button>
+            <button class="btn btn-secondary" id="leaveRoomButton">Leave</button>
         </div>
 
         <canvas id="whiteboard"></canvas>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/script.js" type="module" ></script>
+    <!-- <script src="js/history.js" type="module" defer></script> -->
+    <!-- <script src="js/draw.js" type="module" defer></script> -->
+    <script src="js/ui.js" type="module"></script>
 </body>
 </html>
+
